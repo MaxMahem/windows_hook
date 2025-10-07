@@ -166,11 +166,7 @@ impl Drop for WindowsHook {
         let result = self.unset();
 
         #[cfg(feature = "tracing")]
-        tracing::error!(
-            "Dropping hook"
-            hook_id = self.id,
-            result
-        );
+        tracing::error!("Dropping hook", hook_id = self.id, result);
     }
 }
 
