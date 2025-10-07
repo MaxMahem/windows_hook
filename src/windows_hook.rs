@@ -166,7 +166,10 @@ impl Drop for WindowsHook {
         let result = self.unset();
 
         #[cfg(feature = "tracing")]
-        tracing::error!("Dropping hook", hook_id = self.id, result);
+        match result {
+            Ok(_) => (),
+            Err(err) => tracing::error!(hook_id = self.id, err, "failed to unset hook"),
+        }
     }
 }
 
