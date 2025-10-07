@@ -19,7 +19,7 @@ fluent_result = { git = "https://github.com/MaxMahem/fluent_result.git" }
 
 # Optional dependency on tracing
 tracing = { version = "0.1", optional = true }
-derive_more = { version = "2.0.1", features = ["deref", "deref_mut", "display", "is_variant"] }
+derive_more = { version = "2.0.1", features = ["deref", "deref_mut", "is_variant"] }
 tap = "1.0.1"
 
 [features]
