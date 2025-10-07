@@ -9,7 +9,7 @@ repository = "https://github.com/MaxMahem/windows_hook"
 readme = "README.md"
 keywords = ["windows", "hook", "win32", "interop"]
 categories = ["os::windows-apis", "api-bindings"]
-# documentation = "https://docs.rs/windows_hook"
+documentation = "https://maxmahem.github.io/windows_hook/windows_hook/index.html"
 homepage = "https://github.com/MaxMahem/windows_hook"
 
 
