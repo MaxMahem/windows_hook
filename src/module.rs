@@ -220,7 +220,17 @@ mod tests {
         let module = Module::current()?;
         let hinstance = HINSTANCE::GetModuleHandle(None)?;
 
-        assert_eq!(format!("{:?}", module), format!("{:?}", hinstance));
+        // trim the names which are differnt
+        let module_dbg = format!("{:?}", module);
+        let Some((module_dbg, _)) = module_dbg.rsplit_once(' ') else {
+            panic!("Failed to get module debug");
+        };
+        let hinstance_dbg = format!("{:?}", hinstance);
+        let Some((hinstance_dbg, _)) = hinstance_dbg.rsplit_once(' ') else {
+            panic!("Failed to get hinstance debug");
+        };
+
+        assert_eq!(module_dbg, hinstance_dbg);
         Ok(())
     }
 

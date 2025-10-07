@@ -51,7 +51,7 @@ assert!(hook.state().is_set());
 - `ThreadId`: A thread id wrapper.
 
 ## ToDo
-- Add additional support for hooks where it would be convienent to bundle the loaded library, and drop it with the hook.
+- Add additional support for hooks where it would be convienent to bundle the loaded library, and drop it with the hook.c
 
 ## License
 MIT
