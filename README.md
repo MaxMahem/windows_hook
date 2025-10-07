@@ -18,7 +18,7 @@ extern "system" fn your_hook_fn(code: i32, wparam: usize, lparam: isize) -> isiz
     HHOOK::NULL.CallNextHookEx(unsafe { WH::from_raw(code) }, wparam, lparam)
 }
 
-let hook = WindowsHook::set_new(WH::KEYBOARD_LL, your_hook_fn, Module::NULL, ThreadId::NONE).unwrap();
+let mut hook = WindowsHook::set_new(WH::KEYBOARD_LL, your_hook_fn, Module::NULL, ThreadId::NONE).unwrap();
 assert!(hook.state().is_set());
 
 // hook will unset when it drops out of scope, but it can also be unset manually.
@@ -35,8 +35,8 @@ extern "system" fn your_hook_fn(code: i32, wparam: usize, lparam: isize) -> isiz
 }
 
 let hook = WindowsHookBuilder::new(WH::KEYBOARD_LL, your_hook_fn)
-    .with_module(winsafe::HINSTANCE::NULL)
-    .with_thread_id(winsafe::ThreadId::NONE)
+    .with_module(Module::NULL)
+    .with_thread_id(ThreadId::NONE)
     .build_and_set().unwrap();
 
 assert!(hook.state().is_set());
@@ -51,7 +51,4 @@ assert!(hook.state().is_set());
 - `ThreadId`: A thread id wrapper.
 
 ## ToDo
-- Add additional support for hooks where it would be convienent to bundle the loaded library, and drop it with the hook.c
-
-## License
-MIT
+[ ] Add additional support for hooks where it would be convienent to bundle the loaded library, and drop it with the hook.c
