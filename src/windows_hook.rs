@@ -29,7 +29,7 @@ use crate::{module::Module, *};
 /// # Ok(())
 /// # }
 /// ```
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct WindowsHook {
     hook: Option<HHOOK>,
 }
@@ -192,7 +192,7 @@ impl Drop for WindowsHook {
 /// # Ok(())
 /// # }
 /// ```
-#[derive(Debug, derive_more::Deref, derive_more::DerefMut)]
+#[derive(Debug, Default, derive_more::Deref, derive_more::DerefMut)]
 pub struct KeyboardLLHook(WindowsHook);
 
 impl KeyboardLLHook {
@@ -242,7 +242,7 @@ impl KeyboardLLHook {
 /// # Ok(())
 /// # }
 /// ```
-#[derive(Debug, derive_more::Deref, derive_more::DerefMut)]
+#[derive(Debug, Default, derive_more::Deref, derive_more::DerefMut)]
 pub struct MouseLLHook(WindowsHook);
 
 impl MouseLLHook {
