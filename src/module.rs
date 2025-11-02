@@ -8,8 +8,9 @@ use crate::{HINSTANCE, Handle, SysError};
 
 /// A module handle.
 ///
-/// This is a wrapper around [`Option<NonNull<c_void>>`](NonNull), where a [None] value represents
-/// no module handle, or `NULL`. This type is similar in concept to [`Option<HINSTANCE>`](HINSTANCE).
+/// This is a wrapper around [`Option<NonNull<c_void>>`](NonNull), where a [`None`] value represents
+/// no module handle, or `NULL`. This type is similar in concept to [`Option<HINSTANCE>`](HINSTANCE)
+/// but uses [`NonNull`] size optimisation.
 ///
 /// # Examples
 ///
