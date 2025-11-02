@@ -3,18 +3,18 @@
 [![Build](https://github.com/MaxMahem/windows_hook/actions/workflows/build.yml/badge.svg)](https://github.com/MaxMahem/windows_hook/actions/workflows/build.yml)
 [![Docs](https://github.com/MaxMahem/windows_hook/actions/workflows/docs.yml/badge.svg)](https://MaxMahem.github.io/windows_hook/windows_hook/index.html)
 [![dependency status](https://deps.rs/repo/github/MaxMahem/windows_hook/status.svg)](https://deps.rs/repo/github/MaxMahem/windows_hook)
+[![codecov](https://codecov.io/github/MaxMahem/windows_hook/graph/badge.svg?token=EH5UONSSJA)](https://codecov.io/github/MaxMahem/windows_hook)
 ![GitHub License](https://img.shields.io/github/license/MaxMahem/windows_hook)
-
 
 A safe wrapper around the Windows Hook API for Rust.
 
-This crate provides a safe interface to the Windows Hook API, allowing you to set and unset hooks for various events such as keyboard and mouse input. The `WindowsHook` struct wraps the underlying `winsafe::HHOOK` type and automatically unsets itself when it goes out of scope.
+This crate provides a safe interface to the Windows Hook API, enabling you to set and unset hooks for various events, including keyboard and mouse input. The `WindowsHook` struct wraps the underlying `winsafe::HHOOK` type and automatically unsets itself when it goes out of scope.
 
 A builder pattern is also provided, as well as wrappers for the [`Keyboard_LL`](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-hooks#wh_keyboard_ll) (`KeyboardLLHook`) and [`Mouse_LL`](https://learn.microsoft.com/en-us/windows/win32/winmsg/about-hooks#wh_mouse_ll) (`MouseLLHook`) hooks.
 
 ## Why not use Winsafe directly?
 
-These wrapers automate ownership and drop of these hooks.
+These wrappers automate ownership and the drop of these hooks.
 
 ## Example Usage
 ```rust
