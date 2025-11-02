@@ -168,7 +168,7 @@ impl Drop for WindowsHook {
         #[cfg(feature = "tracing")]
         match result {
             Ok(_) => (),
-            Err(err) => tracing::error!(hook_id = self.id, err, "failed to unset hook"),
+            Err(err) => tracing::error!(?err, "failed to unset hook"),
         }
     }
 }

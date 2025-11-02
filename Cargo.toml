@@ -12,7 +12,6 @@ categories = ["os::windows-apis", "api-bindings"]
 documentation = "https://maxmahem.github.io/windows_hook/windows_hook/index.html"
 homepage = "https://github.com/MaxMahem/windows_hook"
 
-
 [dependencies]
 winsafe = { version = "0.0.26", features = ["user"] }
 fluent_result = { git = "https://github.com/MaxMahem/fluent_result.git" }
@@ -25,3 +24,6 @@ tap = "1.0.1"
 [features]
 default = []
 tracing = ["dep:tracing"]
+
+[dev-dependencies]
+windows_hook = { path = ".", features = ["tracing"] }
