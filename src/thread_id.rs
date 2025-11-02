@@ -3,7 +3,7 @@ use std::num::NonZeroU32;
 use tap::Pipe;
 
 /// A thread id. This is a wrapper around [`Option<NonZeroU32>`](NonZeroU32).
-/// Where a [None] value represents no thread id, or `0`.
+/// Where a [`None`] value represents no thread id, or `0`.
 ///
 /// # Examples
 ///

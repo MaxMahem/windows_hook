@@ -44,16 +44,16 @@ pub enum HookState {
 }
 
 impl WindowsHook {
-    /// Creates a new [WindowsHook] and sets it.
+    /// Creates a new [`WindowsHook`] and sets it.
     ///
     /// # Parameters
     ///
     /// - `id`: The hook type id.
     /// - `proc`: The callback proccess connected to the hook.
-    /// - `module`: A [Module] for the hook, or an object that can be converted to a [Module]
-    ///   (such as an [HINSTANCE]). For `null` hooks, [Module::NULL] can be used.
-    /// - `thread_id`: A [ThreadId] for the hook, or an object that can be converted to a
-    ///   [ThreadId] (such as a [u32]). For threadless hooks, [ThreadId::NONE] can be used.
+    /// - `module`: A [`Module`] for the hook, or an object that can be converted to a [`Module`]
+    ///   (such as an [`HINSTANCE`]). For `null` hooks, [Module::NULL] can be used.
+    /// - `thread_id`: A [`ThreadId`] for the hook, or an object that can be converted to a
+    ///   [`ThreadId`] (such as a [`u32`]). For threadless hooks, [`ThreadId::NONE`] can be used.
     ///
     /// # Errors
     ///

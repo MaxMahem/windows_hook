@@ -1,4 +1,11 @@
 # Windows Hook
+
+[![Build](https://github.com/MaxMahem/windows_hook/actions/workflows/build.yml/badge.svg)](https://github.com/MaxMahem/windows_hook/actions/workflows/build.yml)
+[![Docs](https://github.com/MaxMahem/windows_hook/actions/workflows/docs.yml/badge.svg)](https://MaxMahem.github.io/windows_hook/windows_hook/index.html)
+[![dependency status](https://deps.rs/repo/github/MaxMahem/windows_hook/status.svg)](https://deps.rs/repo/github/MaxMahem/windows_hook)
+![GitHub License](https://img.shields.io/github/license/MaxMahem/windows_hook)
+
+
 A safe wrapper around the Windows Hook API for Rust.
 
 This crate provides a safe interface to the Windows Hook API, allowing you to set and unset hooks for various events such as keyboard and mouse input. The `WindowsHook` struct wraps the underlying `winsafe::HHOOK` type and automatically unsets itself when it goes out of scope.
