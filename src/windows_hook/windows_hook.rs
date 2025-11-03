@@ -1,4 +1,5 @@
-use crate::{module::Module, *};
+use crate::module::Module;
+use crate::{HHOOK, HOOKPROC, SysError, ThreadId, WH};
 
 /// A safe wrapper around [`winsafe::HHOOK`] that automatically unsets itself on drop.
 /// The hook is set once at construction and can be manually unset any number of times without error.
@@ -83,14 +84,13 @@ impl WindowsHook {
         Mod: Into<Module>,
         Tid: Into<ThreadId>,
     {
-        Ok(Self {
-            hook: Some(HHOOK::SetWindowsHookEx(
-                id,
-                proc,
-                module.into().as_HINSTANCE().as_ref(),
-                thread_id.into().as_raw_option(),
-            )?),
-        })
+        let hook = HHOOK::SetWindowsHookEx(
+            id,
+            proc,
+            module.into().as_HINSTANCE().as_ref(),
+            thread_id.into().as_raw_option(),
+        )?;
+        Ok(Self { hook: Some(hook) })
     }
 
     /// Unsets a windows hook. Returns the perviously set hook state.
