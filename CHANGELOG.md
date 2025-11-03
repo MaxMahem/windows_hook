@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2025/11/03
+
+### Added
+
+- Added `Clone`, `Copy`, `PartialEq`, and `Eq` to `HookState`
+
 ## [0.1.1] - 2025/11/01
 
 ### Added

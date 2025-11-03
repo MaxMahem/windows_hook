@@ -33,7 +33,7 @@ pub struct WindowsHook {
 }
 
 /// The state of the hook.
-#[derive(Debug, derive_more::IsVariant)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, derive_more::IsVariant)]
 pub enum HookState {
     /// The hook is set.
     Set,

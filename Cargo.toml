@@ -1,6 +1,6 @@
 [package]
 name = "windows_hook"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["Austin Stanley <maxtmahem@gmail.com>"]
 description = "Safe Win32 hook wrappers with automatic removal."
