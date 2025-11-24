@@ -34,8 +34,8 @@ dependencies = [
 
 [[package]]
 name = "fluent_result"
-version = "0.6.1"
-source = "git+https://github.com/MaxMahem/fluent_result.git#f4adda3a777e87a6c6f7d6297d50622e02dcb5ea"
+version = "0.6.3"
+source = "git+https://github.com/MaxMahem/fluent_result.git#a125e96e2ea655d62defe59d569a4d02f9a40ca1"
 
 [[package]]
 name = "once_cell"
