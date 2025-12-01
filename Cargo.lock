@@ -34,8 +34,12 @@ dependencies = [
 
 [[package]]
 name = "fluent_result"
-version = "0.6.3"
-source = "git+https://github.com/MaxMahem/fluent_result.git#a125e96e2ea655d62defe59d569a4d02f9a40ca1"
+version = "0.8.0"
+source = "git+https://github.com/MaxMahem/fluent_result.git#3f0e7de9aae593d6a5291c5ac332a1968648f504"
+dependencies = [
+ "derive_more",
+ "sealed",
+]
 
 [[package]]
 name = "once_cell"
@@ -65,6 +69,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ce25767e7b499d1b604768e7cde645d14cc8584231ea6b295e9c9eb22c02e1d1"
 dependencies = [
  "proc-macro2",
+]
+
+[[package]]
+name = "sealed"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "22f968c5ea23d555e670b449c1c5e7b2fc399fdaec1d304a17cd48e288abc107"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
