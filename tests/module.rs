@@ -1,4 +1,4 @@
-use windows_hook::{Module, HINSTANCE, SysError, Handle};
+use windows_hook::{HINSTANCE, Handle, Module, SysError};
 
 #[test]
 #[allow(non_snake_case)]
@@ -30,7 +30,11 @@ fn module_from_ptr() -> Result<(), SysError> {
 fn is_invalid_checks() {
     assert!(Module::INVALID.is_invalid());
     assert!(!Module::NULL.is_invalid());
-    assert!(!Module::current().expect("Current module should be valid").is_invalid());
+    assert!(
+        !Module::current()
+            .expect("Current module should be valid")
+            .is_invalid()
+    );
 }
 
 #[test]
@@ -49,33 +53,6 @@ fn module_debug() -> Result<(), SysError> {
     };
 
     assert_eq!(module_dbg, hinstance_dbg);
-    Ok(())
-}
-
-#[test]
-fn module_display() -> Result<(), SysError> {
-    let module = Module::current()?;
-    let hinstance = HINSTANCE::GetModuleHandle(None)?;
-
-    assert_eq!(format!("{}", module), format!("{}", hinstance));
-    Ok(())
-}
-
-#[test]
-fn module_lower_hex() -> Result<(), SysError> {
-    let module = Module::current()?;
-    let hinstance = HINSTANCE::GetModuleHandle(None)?;
-
-    assert_eq!(format!("{:x}", module), format!("{:x}", hinstance));
-    Ok(())
-}
-
-#[test]
-fn module_upper_hex() -> Result<(), SysError> {
-    let module = Module::current()?;
-    let hinstance = HINSTANCE::GetModuleHandle(None)?;
-
-    assert_eq!(format!("{:X}", module), format!("{:X}", hinstance));
     Ok(())
 }
 

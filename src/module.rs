@@ -23,7 +23,17 @@ use crate::{HINSTANCE, Handle, SysError};
 /// # Ok(())
 /// # }
 /// ```
-#[derive(Clone, Copy, Hash, PartialEq, Eq, derive_more::Deref, derive_more::Display, derive_more::LowerHex, derive_more::UpperHex)]
+#[derive(
+    Clone,
+    Copy,
+    Hash,
+    PartialEq,
+    Eq,
+    derive_more::Deref,
+    derive_more::Display,
+    derive_more::LowerHex,
+    derive_more::UpperHex,
+)]
 #[display("{:#010x}", self.ptr() as usize)]
 #[lower_hex("{:#010x}", self.ptr() as usize)]
 #[upper_hex("{:#010X}", self.ptr() as usize)]
