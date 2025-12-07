@@ -90,7 +90,8 @@ impl WindowsHook {
             proc,
             module.into().as_HINSTANCE().as_ref(),
             thread_id.into().as_raw_option(),
-        ).map(|hook| Self { hook: Some(hook) })
+        )
+        .map(|hook| Self { hook: Some(hook) })
     }
 
     /// Unsets a windows hook. Returns the perviously set hook state.
@@ -171,4 +172,3 @@ impl Drop for WindowsHook {
         }
     }
 }
-

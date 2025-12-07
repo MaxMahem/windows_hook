@@ -37,4 +37,3 @@ impl MouseLLHook {
         WindowsHook::set_new(WH::MOUSE_LL, proc, Module::NULL, ThreadId::NONE).map(Self)
     }
 }
-

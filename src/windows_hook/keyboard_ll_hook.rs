@@ -54,4 +54,3 @@ impl KeyboardLLHook {
         WindowsHook::set_new(WH::KEYBOARD_LL, proc, Module::NULL, ThreadId::NONE).map(Self)
     }
 }
-

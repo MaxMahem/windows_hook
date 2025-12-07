@@ -28,9 +28,18 @@ fn module_from_ptr() -> Result<(), SysError> {
 
 #[test]
 fn is_invalid_checks() -> Result<(), SysError> {
-    assert!(Module::INVALID.is_invalid(), "Invalid module should be invalid");
-    assert!(!Module::NULL.is_invalid(), "Null module should not be invalid");
-    assert!(!Module::current()?.is_invalid(), "Current module should not be invalid");
+    assert!(
+        Module::INVALID.is_invalid(),
+        "Invalid module should be invalid"
+    );
+    assert!(
+        !Module::NULL.is_invalid(),
+        "Null module should not be invalid"
+    );
+    assert!(
+        !Module::current()?.is_invalid(),
+        "Current module should not be invalid"
+    );
     Ok(())
 }
 
@@ -56,15 +65,24 @@ fn module_debug() -> Result<(), SysError> {
 #[test]
 fn get_by_name_valid_module() -> Result<(), SysError> {
     let module = Module::get_by_name("kernel32.dll")?;
-    assert!(!module.is_null(), "Valid module name should not return null");
-    assert!(!module.is_invalid(), "Valid module name should not return invalid");
+    assert!(
+        !module.is_null(),
+        "Valid module name should not return null"
+    );
+    assert!(
+        !module.is_invalid(),
+        "Valid module name should not return invalid"
+    );
     Ok(())
 }
 
 #[test]
 fn get_by_name_invalid_module() {
     let result = Module::get_by_name("nonexistent_module_12345.dll");
-    assert!(result.is_err(), "Invalid module name should return an error");
+    assert!(
+        result.is_err(),
+        "Invalid module name should return an error"
+    );
 }
 
 #[test]

@@ -98,4 +98,3 @@ impl std::fmt::Display for ThreadId {
         self.raw().fmt(f)
     }
 }
-

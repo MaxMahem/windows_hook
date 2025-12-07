@@ -1,4 +1,4 @@
-use crate::{WH, HOOKPROC, Module, ThreadId, WindowsHook, SysError};
+use crate::{HOOKPROC, Module, SysError, ThreadId, WH, WindowsHook};
 
 /// A builder for a [`WindowsHook`].
 ///
@@ -144,4 +144,3 @@ impl WindowsHookBuilder {
         WindowsHook::set_new(self.id, self.proc, self.module, self.thread_id)
     }
 }
-

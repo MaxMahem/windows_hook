@@ -1,4 +1,4 @@
-use windows_hook::{WindowsHook, WH, Module, ThreadId};
+use windows_hook::{Module, ThreadId, WH, WindowsHook};
 
 // Dummy hook procedure for testing
 extern "system" fn dummy_hook_proc(_code: i32, _wparam: usize, _lparam: isize) -> isize {
