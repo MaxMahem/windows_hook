@@ -23,7 +23,10 @@ use crate::{HINSTANCE, Handle, SysError};
 /// # Ok(())
 /// # }
 /// ```
-#[derive(Clone, Copy, Hash, PartialEq, Eq, derive_more::Deref)]
+#[derive(Clone, Copy, Hash, PartialEq, Eq, derive_more::Deref, derive_more::Display, derive_more::LowerHex, derive_more::UpperHex)]
+#[display("{:#010x}", self.ptr() as usize)]
+#[lower_hex("{:#010x}", self.ptr() as usize)]
+#[upper_hex("{:#010X}", self.ptr() as usize)]
 pub struct Module(Option<NonNull<c_void>>);
 
 impl Module {
@@ -151,24 +154,6 @@ impl std::fmt::Debug for Module {
     }
 }
 
-impl std::fmt::Display for Module {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:#010x}", self.ptr() as usize)
-    }
-}
-
-impl std::fmt::LowerHex for Module {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        (self.ptr() as usize).fmt(f)
-    }
-}
-
-impl std::fmt::UpperHex for Module {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        (self.ptr() as usize).fmt(f)
-    }
-}
-
 unsafe impl Send for Module {}
 
 impl Handle for Module {
@@ -189,4 +174,3 @@ impl Handle for Module {
         self.0.map_or(std::ptr::null_mut(), NonNull::as_ptr)
     }
 }
-
