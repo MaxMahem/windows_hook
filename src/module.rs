@@ -1,7 +1,7 @@
 use std::ffi::c_void;
 use std::ptr::NonNull;
 
-use fluent_result::IntoOption;
+use fluent_result::into::IntoOption;
 use tap::Pipe;
 
 use crate::{HINSTANCE, Handle, SysError};
