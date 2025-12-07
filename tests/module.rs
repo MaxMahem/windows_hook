@@ -71,3 +71,20 @@ fn get_by_name_invalid_module() {
     let result = Module::get_by_name("nonexistent_module_12345.dll");
     assert!(result.is_err());
 }
+
+#[test]
+fn module_as_mut() -> Result<(), SysError> {
+    let mut module = Module::current()?;
+    let original_ptr = module.ptr();
+
+    let ptr_ref = unsafe { module.as_mut() };
+    assert_eq!(*ptr_ref, original_ptr, "Pointer should match");
+
+    let null_ptr = std::ptr::null_mut();
+    *ptr_ref = null_ptr;
+
+    assert_eq!(module.ptr(), null_ptr, "Pointer should be null");
+    assert!(module.is_null(), "Module should be null");
+
+    Ok(())
+}
