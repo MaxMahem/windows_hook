@@ -57,5 +57,5 @@ assert!(hook.state().is_set());
 - `Module`: A module handle, similar to (and convertible to) the `winsafe::HMODULE`/`HINSTANCE` type.
 - `ThreadId`: A thread id wrapper.
 
-## ToDo
+## To Do
 - [ ] Add additional support for hooks where it would be convenient to bundle the loaded library, and drop it with the hook.

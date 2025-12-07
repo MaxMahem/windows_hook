@@ -106,7 +106,9 @@ fn as_mut() -> Result<(), SysError> {
 #[test]
 #[allow(non_snake_case)]
 fn as_HINSTANCE() -> Result<(), SysError> {
-    Module::NULL.as_HINSTANCE().expect_none("Null module should return None");
+    Module::NULL
+        .as_HINSTANCE()
+        .expect_none("Null module should return None");
 
     let current_module = Module::current()?;
     let hinstance = current_module.as_HINSTANCE();

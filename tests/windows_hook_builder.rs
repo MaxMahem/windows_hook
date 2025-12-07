@@ -10,7 +10,10 @@ fn new_builder_defaults() {
     let builder = WindowsHookBuilder::new(WH::KEYBOARD_LL, dummy_hook_proc);
 
     assert_eq!(builder.id, WH::KEYBOARD_LL, "Hook id should match");
-    assert_eq!(builder.proc as usize, dummy_hook_proc as usize, "Hook proc should match");
+    assert_eq!(
+        builder.proc as usize, dummy_hook_proc as usize,
+        "Hook proc should match"
+    );
     assert!(builder.module.is_null(), "Module should be null");
     assert!(builder.thread_id.is_none(), "Thread id should be none");
 }
@@ -27,7 +30,11 @@ fn with_module_sets_module() {
 fn with_thread_id_sets_thread_id() {
     let builder = WindowsHookBuilder::new(WH::MOUSE_LL, dummy_hook_proc).with_thread_id(1234);
 
-    assert_eq!(builder.thread_id, ThreadId::from(1234), "Thread id should match");
+    assert_eq!(
+        builder.thread_id,
+        ThreadId::from(1234),
+        "Thread id should match"
+    );
 }
 
 #[test]
@@ -39,7 +46,11 @@ fn chained_builder_methods() {
 
     assert_eq!(builder.id, WH::KEYBOARD_LL, "Hook id should match");
     assert_eq!(builder.module, module, "Module should match");
-    assert_eq!(builder.thread_id, ThreadId::from(42), "Thread id should match");
+    assert_eq!(
+        builder.thread_id,
+        ThreadId::from(42),
+        "Thread id should match"
+    );
 }
 
 #[test]
