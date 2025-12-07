@@ -78,3 +78,19 @@ fn module_upper_hex() -> Result<(), SysError> {
     assert_eq!(format!("{:X}", module), format!("{:X}", hinstance));
     Ok(())
 }
+
+#[test]
+fn get_by_name_valid_module() -> Result<(), SysError> {
+    // kernel32.dll is always loaded in a Windows process
+    let module = Module::get_by_name("kernel32.dll")?;
+    assert!(!module.is_null());
+    assert!(!module.is_invalid());
+    Ok(())
+}
+
+#[test]
+fn get_by_name_invalid_module() {
+    // A module that doesn't exist should return an error
+    let result = Module::get_by_name("nonexistent_module_12345.dll");
+    assert!(result.is_err());
+}
