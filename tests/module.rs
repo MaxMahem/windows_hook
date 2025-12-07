@@ -4,10 +4,10 @@ use windows_hook::{HINSTANCE, Handle, Module, SysError};
 #[allow(non_snake_case)]
 fn module_from_HINSTANCE() -> Result<(), SysError> {
     let module = Module::from(HINSTANCE::NULL);
-    assert!(module.is_null());
+    assert!(module.is_null(), "Null instance should return null");
 
     let module: Module = HINSTANCE::GetModuleHandle(None)?.into();
-    assert!(!module.is_null());
+    assert!(!module.is_null(), "Valid instance should not return null");
 
     Ok(())
 }
@@ -15,26 +15,23 @@ fn module_from_HINSTANCE() -> Result<(), SysError> {
 #[test]
 fn module_from_ptr() -> Result<(), SysError> {
     let module = unsafe { Module::from_ptr(std::ptr::null_mut()) };
-    assert!(module.is_null());
+    assert!(module.is_null(), "Null pointer should return null");
 
     let instance = HINSTANCE::GetModuleHandle(None)?;
     let module = unsafe { Module::from_ptr(instance.ptr()) };
 
-    assert!(!module.is_null());
-    assert_eq!(instance.ptr(), module.ptr());
+    assert!(!module.is_null(), "Valid pointer should not return null");
+    assert_eq!(instance.ptr(), module.ptr(), "Pointer should match");
 
     Ok(())
 }
 
 #[test]
-fn is_invalid_checks() {
-    assert!(Module::INVALID.is_invalid());
-    assert!(!Module::NULL.is_invalid());
-    assert!(
-        !Module::current()
-            .expect("Current module should be valid")
-            .is_invalid()
-    );
+fn is_invalid_checks() -> Result<(), SysError> {
+    assert!(Module::INVALID.is_invalid(), "Invalid module should be invalid");
+    assert!(!Module::NULL.is_invalid(), "Null module should not be invalid");
+    assert!(!Module::current()?.is_invalid(), "Current module should not be invalid");
+    Ok(())
 }
 
 #[test]
@@ -58,22 +55,20 @@ fn module_debug() -> Result<(), SysError> {
 
 #[test]
 fn get_by_name_valid_module() -> Result<(), SysError> {
-    // kernel32.dll is always loaded in a Windows process
     let module = Module::get_by_name("kernel32.dll")?;
-    assert!(!module.is_null());
-    assert!(!module.is_invalid());
+    assert!(!module.is_null(), "Valid module name should not return null");
+    assert!(!module.is_invalid(), "Valid module name should not return invalid");
     Ok(())
 }
 
 #[test]
 fn get_by_name_invalid_module() {
-    // A module that doesn't exist should return an error
     let result = Module::get_by_name("nonexistent_module_12345.dll");
-    assert!(result.is_err());
+    assert!(result.is_err(), "Invalid module name should return an error");
 }
 
 #[test]
-fn module_as_mut() -> Result<(), SysError> {
+fn as_mut() -> Result<(), SysError> {
     let mut module = Module::current()?;
     let original_ptr = module.ptr();
 
