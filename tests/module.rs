@@ -1,0 +1,82 @@
+use windows_hook::{Module, HINSTANCE, SysError, Handle};
+
+#[test]
+#[allow(non_snake_case)]
+fn module_from_HINSTANCE() -> Result<(), SysError> {
+    let module = Module::from(HINSTANCE::NULL);
+    assert!(module.is_null());
+
+    let module: Module = HINSTANCE::GetModuleHandle(None)?.into();
+    assert!(!module.is_null());
+
+    Ok(())
+}
+
+#[test]
+fn module_from_ptr() -> Result<(), SysError> {
+    let module = unsafe { Module::from_ptr(std::ptr::null_mut()) };
+    assert!(module.is_null());
+
+    let instance = HINSTANCE::GetModuleHandle(None)?;
+    let module = unsafe { Module::from_ptr(instance.ptr()) };
+
+    assert!(!module.is_null());
+    assert_eq!(instance.ptr(), module.ptr());
+
+    Ok(())
+}
+
+#[test]
+fn module_is_invalid() -> Result<(), SysError> {
+    assert!(Module::INVALID.is_invalid());
+    assert!(!Module::NULL.is_invalid());
+    assert!(!Module::current()?.is_invalid());
+
+    Ok(())
+}
+
+#[test]
+fn module_debug() -> Result<(), SysError> {
+    let module = Module::current()?;
+    let hinstance = HINSTANCE::GetModuleHandle(None)?;
+
+    // trim the names which are differnt
+    let module_dbg = format!("{:?}", module);
+    let Some((module_dbg, _)) = module_dbg.rsplit_once(' ') else {
+        panic!("Failed to get module debug");
+    };
+    let hinstance_dbg = format!("{:?}", hinstance);
+    let Some((hinstance_dbg, _)) = hinstance_dbg.rsplit_once(' ') else {
+        panic!("Failed to get hinstance debug");
+    };
+
+    assert_eq!(module_dbg, hinstance_dbg);
+    Ok(())
+}
+
+#[test]
+fn module_display() -> Result<(), SysError> {
+    let module = Module::current()?;
+    let hinstance = HINSTANCE::GetModuleHandle(None)?;
+
+    assert_eq!(format!("{}", module), format!("{}", hinstance));
+    Ok(())
+}
+
+#[test]
+fn module_lower_hex() -> Result<(), SysError> {
+    let module = Module::current()?;
+    let hinstance = HINSTANCE::GetModuleHandle(None)?;
+
+    assert_eq!(format!("{:x}", module), format!("{:x}", hinstance));
+    Ok(())
+}
+
+#[test]
+fn module_upper_hex() -> Result<(), SysError> {
+    let module = Module::current()?;
+    let hinstance = HINSTANCE::GetModuleHandle(None)?;
+
+    assert_eq!(format!("{:X}", module), format!("{:X}", hinstance));
+    Ok(())
+}
