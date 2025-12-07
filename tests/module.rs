@@ -1,3 +1,4 @@
+use fluent_result::expect::ExpectNone;
 use windows_hook::{HINSTANCE, Handle, Module, SysError};
 
 #[test]
@@ -98,6 +99,29 @@ fn as_mut() -> Result<(), SysError> {
 
     assert_eq!(module.ptr(), null_ptr, "Pointer should be null");
     assert!(module.is_null(), "Module should be null");
+
+    Ok(())
+}
+
+#[test]
+#[allow(non_snake_case)]
+fn as_HINSTANCE() -> Result<(), SysError> {
+    Module::NULL.as_HINSTANCE().expect_none("Null module should return None");
+
+    let current_module = Module::current()?;
+    let hinstance = current_module.as_HINSTANCE();
+    assert!(
+        hinstance.is_some(),
+        "Valid module should return Some(HINSTANCE)"
+    );
+
+    // Verify the HINSTANCE matches the original pointer
+    let hinstance = hinstance.unwrap();
+    assert_eq!(
+        hinstance.ptr(),
+        current_module.ptr(),
+        "HINSTANCE pointer should match module pointer"
+    );
 
     Ok(())
 }
