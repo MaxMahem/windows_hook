@@ -50,7 +50,7 @@ impl WindowsHook {
     /// - `id`: The hook type id.
     /// - `proc`: The callback proccess connected to the hook.
     /// - `module`: A [`Module`] for the hook, or an object that can be converted to a [`Module`]
-    ///   (such as an [`HINSTANCE`]). For `null` hooks, [Module::NULL] can be used.
+    ///   (such as an [`HINSTANCE`]). For `null` hooks, [`Module::NULL`] can be used.
     /// - `thread_id`: A [`ThreadId`] for the hook, or an object that can be converted to a
     ///   [`ThreadId`] (such as a [`u32`]). For threadless hooks, [`ThreadId::NONE`] can be used.
     ///
@@ -74,6 +74,7 @@ impl WindowsHook {
     /// # Ok(())
     /// # }
     /// ```
+    #[inline]
     pub fn set_new<Mod, Tid>(
         id: WH,
         proc: HOOKPROC,
@@ -84,13 +85,12 @@ impl WindowsHook {
         Mod: Into<Module>,
         Tid: Into<ThreadId>,
     {
-        let hook = HHOOK::SetWindowsHookEx(
+        HHOOK::SetWindowsHookEx(
             id,
             proc,
             module.into().as_HINSTANCE().as_ref(),
             thread_id.into().as_raw_option(),
-        )?;
-        Ok(Self { hook: Some(hook) })
+        ).map(|hook| Self { hook: Some(hook) })
     }
 
     /// Unsets a windows hook. Returns the perviously set hook state.
@@ -117,6 +117,7 @@ impl WindowsHook {
     /// # Ok(())
     /// # }
     /// ```
+    #[inline]
     pub fn unset(&mut self) -> Result<HookState, SysError> {
         match self.hook.take() {
             None => Ok(HookState::Unset),
@@ -148,6 +149,8 @@ impl WindowsHook {
     /// # Ok(())
     /// # }
     /// ```
+    #[must_use]
+    #[inline]
     pub fn state(&self) -> HookState {
         match self.hook {
             None => HookState::Unset,

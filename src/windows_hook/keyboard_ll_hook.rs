@@ -28,7 +28,7 @@ use crate::{SysError, ThreadId, WindowsHook, module::Module};
 pub struct KeyboardLLHook(WindowsHook);
 
 impl KeyboardLLHook {
-    /// Creates a new [KeyboardLLHook] and sets it.
+    /// Creates a new [`KeyboardLLHook`] and sets it.
     ///
     /// # Errors
     ///

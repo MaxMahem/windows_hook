@@ -27,12 +27,10 @@ fn module_from_ptr() -> Result<(), SysError> {
 }
 
 #[test]
-fn module_is_invalid() -> Result<(), SysError> {
+fn is_invalid_checks() {
     assert!(Module::INVALID.is_invalid());
     assert!(!Module::NULL.is_invalid());
-    assert!(!Module::current()?.is_invalid());
-
-    Ok(())
+    assert!(!Module::current().expect("Current module should be valid").is_invalid());
 }
 
 #[test]

@@ -1,4 +1,4 @@
-use crate::*;
+use crate::{WH, HOOKPROC, Module, ThreadId, WindowsHook, SysError};
 
 /// A builder for a [`WindowsHook`].
 ///
@@ -32,7 +32,7 @@ pub struct WindowsHookBuilder {
 }
 
 impl WindowsHookBuilder {
-    /// Creates a new [WindowsHookBuilder] with the mandatory properties.
+    /// Creates a new [`WindowsHookBuilder`] with the mandatory properties.
     /// The optional paramaters are set to [`None`].
     ///
     /// # Parameters
@@ -54,6 +54,7 @@ impl WindowsHookBuilder {
     /// assert!(builder.module.is_null());
     /// assert!(builder.thread_id.is_none());
     /// ```
+    #[inline]
     pub fn new(id: WH, proc: winsafe::HOOKPROC) -> Self {
         Self {
             id,
@@ -85,6 +86,8 @@ impl WindowsHookBuilder {
     /// # Ok(())
     /// # }
     /// ```
+    #[must_use]
+    #[inline]
     pub fn with_module<Mod: Into<Module>>(mut self, module: Mod) -> Self {
         self.module = module.into();
         self
@@ -94,7 +97,7 @@ impl WindowsHookBuilder {
     ///
     /// # Parameters
     ///
-    /// - `thread_id`: The thread id of the hook, or a type that can be converted to [ThreadId].
+    /// - `thread_id`: The thread id of the hook, or a type that can be converted to [`ThreadId`].
     ///
     /// # Examples
     ///
@@ -108,6 +111,8 @@ impl WindowsHookBuilder {
     /// let builder = WindowsHookBuilder::new(WH::KEYBOARD_LL, your_hook_fn).with_thread_id(1);
     /// assert!(builder.thread_id.is_some());
     /// ```
+    #[must_use]
+    #[inline]
     pub fn with_thread_id<Tid: Into<ThreadId>>(mut self, thread_id: Tid) -> Self {
         self.thread_id = thread_id.into();
         self
@@ -134,6 +139,7 @@ impl WindowsHookBuilder {
     /// # Ok(())
     /// # }
     /// ```
+    #[inline]
     pub fn build_and_set(self) -> Result<WindowsHook, SysError> {
         WindowsHook::set_new(self.id, self.proc, self.module, self.thread_id)
     }

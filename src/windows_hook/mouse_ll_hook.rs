@@ -5,7 +5,7 @@ use winsafe::co::WH;
 
 use crate::{SysError, ThreadId, WindowsHook, module::Module};
 
-/// A safe wrapper around a [`HHOOK`] for a the [WH::MOUSE_LL] mouse hook.
+/// A safe wrapper around a [`HHOOK`] for a the [`WH::MOUSE_LL`] mouse hook.
 ///
 /// # Examples
 ///

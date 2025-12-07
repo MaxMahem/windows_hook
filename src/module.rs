@@ -89,6 +89,8 @@ impl Module {
     /// # Ok(())
     /// # }
     /// ```
+    #[inline]
+    #[must_use]
     pub fn is_null(&self) -> bool {
         self.0.is_none()
     }
@@ -107,6 +109,8 @@ impl Module {
     /// # Ok(())
     /// # }
     /// ```
+    #[inline]
+    #[must_use]
     pub fn is_invalid(&self) -> bool {
         self == &Self::INVALID
     }
@@ -143,7 +147,7 @@ impl From<HINSTANCE> for Module {
 impl std::fmt::Debug for Module {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let ptr = self.ptr() as usize;
-        write!(f, "[{:#010x} {}] Module", ptr, ptr)
+        write!(f, "[{ptr:#010x} {ptr}] Module")
     }
 }
 
@@ -178,11 +182,11 @@ impl Handle for Module {
     unsafe fn as_mut(&mut self) -> &mut *mut c_void {
         // SAFETY: We never touch the pointer so its as safe as it ever was.
         // Transmute is safe because `NonNull` just wraps `*mut c_void`.
-        unsafe { std::mem::transmute(self) }
+        unsafe { &mut *std::ptr::from_mut(self).cast::<*mut c_void>() }
     }
 
     fn ptr(&self) -> *mut std::ffi::c_void {
-        self.0.map(NonNull::as_ptr).unwrap_or(std::ptr::null_mut())
+        self.0.map_or(std::ptr::null_mut(), NonNull::as_ptr)
     }
 }
 

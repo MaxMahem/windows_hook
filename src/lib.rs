@@ -1,4 +1,8 @@
 #![doc = include_str!("../README.md")]
+
+#![warn(clippy::pedantic)]
+#![warn(clippy::cargo)]
+
 #[cfg(not(windows))]
 compile_error!("This crate only supports Windows targets.");
 

@@ -26,7 +26,7 @@ impl ThreadId {
     /// A thread id that represents no thread id, or `0`.
     pub const NONE: ThreadId = ThreadId(None);
 
-    /// Returns the current thread id as a [ThreadId].
+    /// Returns the current thread id as a [`ThreadId`].
     ///
     /// # Examples
     ///
@@ -35,6 +35,7 @@ impl ThreadId {
     ///
     /// assert!(ThreadId::NONE != ThreadId::current());
     /// ```
+    #[inline]
     pub fn current() -> Self {
         winsafe::GetCurrentThreadId().pipe(ThreadId::from)
     }
@@ -49,6 +50,8 @@ impl ThreadId {
     /// assert_eq!(true, ThreadId::NONE.is_none());
     /// assert_eq!(false, ThreadId::from(1).is_none());
     /// ```
+    #[inline]
+    #[must_use]
     pub fn is_none(&self) -> bool {
         self.0.is_none()
     }
@@ -63,8 +66,9 @@ impl ThreadId {
     /// assert_eq!(0, ThreadId::NONE.raw());
     /// assert_eq!(1, ThreadId::from(1).raw());
     /// ```
+    #[inline]
     pub fn raw(&self) -> u32 {
-        self.0.map(NonZeroU32::get).unwrap_or(0)
+        self.0.map_or(0, NonZeroU32::get)
     }
 
     /// Returns the thread id as a [`Option<u32>`](u32).
@@ -77,6 +81,7 @@ impl ThreadId {
     /// assert_eq!(None, ThreadId::NONE.as_raw_option());
     /// assert_eq!(Some(1), ThreadId::from(1).as_raw_option());
     /// ```
+    #[inline]
     pub fn as_raw_option(&self) -> Option<u32> {
         self.0.map(NonZeroU32::get)
     }
