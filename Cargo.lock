@@ -36,8 +36,8 @@ dependencies = [
 
 [[package]]
 name = "fluent_result"
-version = "0.8.3"
-source = "git+https://github.com/MaxMahem/fluent_result.git#353993d6ce7fcb184cc58bd2d242ca7a6b80d8b8"
+version = "0.9.0"
+source = "git+https://github.com/MaxMahem/fluent_result.git#2408193ac243e4028cf6530b0c7daeb637e4cd8b"
 dependencies = [
  "derive_more",
  "sealed",
