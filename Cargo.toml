@@ -13,7 +13,7 @@ documentation = "https://maxmahem.github.io/windows_hook/windows_hook/index.html
 homepage = "https://github.com/MaxMahem/windows_hook"
 
 [dependencies]
-winsafe = { version = "0.0.26", features = ["user"] }
+winsafe = { version = "0.0.27", features = ["user"] }
 fluent_result = { git = "https://github.com/MaxMahem/fluent_result.git" }
 
 # Optional dependency on tracing
